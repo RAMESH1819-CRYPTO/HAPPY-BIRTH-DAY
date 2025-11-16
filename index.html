@@ -1,204 +1,805 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Anusha 🎂</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    overflow: hidden;
-    height: 100vh;
-    background: linear-gradient(135deg, #ffccf9, #aeefff);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-  }
-
-  header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(10px);
-    text-align: center;
-    padding: 15px 0;
-    font-size: 22px;
-    font-weight: 600;
-    color: #007bff;
-    font-family: 'Dancing Script', cursive;
-    text-shadow: 0 0 8px #fff, 0 0 12px #00bfff;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.4);
-  }
-
-  h1 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 3em;
-    color: #007bff;
-    text-shadow: 0 0 10px #fff, 0 0 25px #00bfff, 0 0 45px #00bfff;
-    animation: glow 2s infinite alternate;
-    margin-top: 100px;
-  }
-
-  p {
-    font-size: 1.2em;
-    color: #004f91;
-    font-weight: 500;
-    margin-top: 10px;
-  }
-
-  @keyframes glow {
-    from { text-shadow: 0 0 10px #fff, 0 0 20px #00bfff; }
-    to { text-shadow: 0 0 25px #fff, 0 0 40px #00bfff; }
-  }
-
-  button {
-    background: #ff69b4;
-    border: none;
-    color: white;
-    font-size: 1em;
-    font-weight: bold;
-    padding: 12px 25px;
-    border-radius: 30px;
-    margin-top: 20px;
-    box-shadow: 0 0 10px #ff69b4, 0 0 20px #ffb6c1;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  button:hover {
-    background: #ff85c1;
-    transform: scale(1.05);
-  }
-
-  canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-  }
-
-  .hearts {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .heart {
-    position: absolute;
-    color: #ff69b4;
-    animation: floatHearts 6s linear infinite;
-  }
-
-  @keyframes floatHearts {
-    0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
-    100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaClone - Photo Sharing App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #fafafa;
+        }
+        
+        .hidden { display: none; }
+        
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #dbdbdb;
+            padding: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 935px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background 0.2s;
+        }
+        
+        .icon-btn:hover {
+            background: #f0f0f0;
+        }
+        
+        /* Auth Pages */
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .auth-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .auth-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 32px;
+            gap: 12px;
+        }
+        
+        .input-group {
+            margin-bottom: 16px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #262626;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+        
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #8b5cf6, #ec4899);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .auth-switch {
+            text-align: center;
+            margin-top: 24px;
+        }
+        
+        .auth-switch button {
+            background: none;
+            border: none;
+            color: #8b5cf6;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .error-msg {
+            background: #fee;
+            border: 1px solid #fcc;
+            color: #c00;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        
+        .info-box {
+            margin-top: 32px;
+            padding: 16px;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+        }
+        
+        .info-box p {
+            font-size: 12px;
+            color: #1e40af;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .info-box ol {
+            font-size: 11px;
+            color: #1e3a8a;
+            padding-left: 20px;
+        }
+        
+        .info-box li {
+            margin-bottom: 4px;
+        }
+        
+        /* Feed */
+        .feed-container {
+            max-width: 600px;
+            margin: 32px auto;
+            padding: 0 20px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 64px 20px;
+            color: #8e8e8e;
+        }
+        
+        .empty-state svg {
+            margin: 0 auto 16px;
+            opacity: 0.3;
+        }
+        
+        .post {
+            background: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+        }
+        
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #a78bfa, #f472b6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .post-username {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .post-date {
+            font-size: 12px;
+            color: #8e8e8e;
+        }
+        
+        .post-image {
+            width: 100%;
+            display: block;
+        }
+        
+        .post-actions {
+            padding: 16px;
+        }
+        
+        .like-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .like-btn svg {
+            transition: transform 0.2s;
+        }
+        
+        .like-btn:hover svg {
+            transform: scale(1.1);
+        }
+        
+        .like-btn.liked svg {
+            fill: #ed4956;
+            stroke: #ed4956;
+        }
+        
+        .post-likes {
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+        
+        .post-caption {
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        
+        .post-caption strong {
+            margin-right: 8px;
+        }
+        
+        /* Upload */
+        .upload-container {
+            max-width: 600px;
+            margin: 32px auto;
+            padding: 0 20px;
+        }
+        
+        .upload-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .btn-text {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+        
+        .btn-text.cancel {
+            color: #262626;
+        }
+        
+        .btn-text.share {
+            color: #8b5cf6;
+            font-weight: 600;
+        }
+        
+        .btn-text:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .upload-box {
+            background: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            padding: 24px;
+        }
+        
+        .file-input-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #dbdbdb;
+            border-radius: 8px;
+            padding: 64px 20px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        
+        .file-input-label:hover {
+            border-color: #8b5cf6;
+        }
+        
+        .file-input-label span {
+            color: #8e8e8e;
+            margin-top: 12px;
+        }
+        
+        .preview-container {
+            margin-bottom: 16px;
+        }
+        
+        .preview-image {
+            width: 100%;
+            border-radius: 8px;
+        }
+        
+        .remove-btn {
+            color: #ed4956;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dbdbdb;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: none;
+            margin-top: 16px;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+    </style>
 </head>
 <body>
+    <!-- Login View -->
+    <div id="loginView" class="auth-container">
+        <div class="auth-box">
+            <div class="auth-logo">
+                <i data-lucide="camera" style="width: 48px; height: 48px; color: #8b5cf6;"></i>
+                <h1 class="logo">InstaClone</h1>
+            </div>
+            
+            <div id="errorMsg" class="error-msg hidden"></div>
+            
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email">
+            </div>
+            
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password">
+            </div>
+            
+            <button class="btn-primary" onclick="handleSignIn()">Sign In</button>
+            
+            <div class="auth-switch">
+                <button onclick="showSignup()">Don't have an account? Sign up</button>
+            </div>
+            
+            <div class="info-box">
+                <p>Demo Mode - Setup Instructions:</p>
+                <ol>
+                    <li>Create a Firebase project at console.firebase.google.com</li>
+                    <li>Enable Authentication (Email/Password)</li>
+                    <li>Create Firestore Database and Storage</li>
+                    <li>Replace FIREBASE_CONFIG in the script</li>
+                    <li>Add Firebase SDK scripts</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Signup View -->
+    <div id="signupView" class="auth-container hidden">
+        <div class="auth-box">
+            <div class="auth-logo">
+                <i data-lucide="camera" style="width: 48px; height: 48px; color: #8b5cf6;"></i>
+                <h1 class="logo">InstaClone</h1>
+            </div>
+            
+            <div id="errorMsgSignup" class="error-msg hidden"></div>
+            
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="signupUsername" placeholder="Choose a username">
+            </div>
+            
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="signupEmail" placeholder="Enter your email">
+            </div>
+            
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="signupPassword" placeholder="Create a password (min 6 characters)">
+            </div>
+            
+            <button class="btn-primary" onclick="handleSignUp()">Sign Up</button>
+            
+            <div class="auth-switch">
+                <button onclick="showLogin()">Already have an account? Sign in</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Feed View -->
+    <div id="feedView" class="hidden">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i data-lucide="camera"></i>
+                    <span>InstaClone</span>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn" onclick="showUpload()" title="New Post">
+                        <i data-lucide="upload"></i>
+                    </button>
+                    <button class="icon-btn" onclick="handleLogout()" title="Logout">
+                        <i data-lucide="log-out"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <div class="feed-container">
+            <div id="emptyState" class="empty-state">
+                <i data-lucide="camera" style="width: 64px; height: 64px;"></i>
+                <p style="margin-bottom: 16px;">No posts yet</p>
+                <button class="btn-primary" style="max-width: 200px; margin: 0 auto;" onclick="showUpload()">
+                    Share your first photo
+                </button>
+            </div>
+            <div id="postsContainer"></div>
+        </div>
+    </div>
+    
+    <!-- Upload View -->
+    <div id="uploadView" class="hidden">
+        <header class="header">
+            <div class="header-content">
+                <div class="upload-header" style="width: 100%;">
+                    <button class="btn-text cancel" onclick="showFeed()">Cancel</button>
+                    <h2 style="font-size: 16px; font-weight: 600;">New Post</h2>
+                    <button class="btn-text share" onclick="handlePost()" id="shareBtn" disabled>Share</button>
+                </div>
+            </div>
+        </header>
+        
+        <div class="upload-container">
+            <div id="uploadError" class="error-msg hidden"></div>
+            
+            <div class="upload-box">
+                <div id="fileSelectArea">
+                    <label for="fileInput" class="file-input-label">
+                        <i data-lucide="upload" style="width: 48px; height: 48px; color: #8e8e8e;"></i>
+                        <span>Click to select a photo</span>
+                    </label>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
+                </div>
+                
+                <div id="previewArea" class="hidden">
+                    <div class="preview-container">
+                        <img id="previewImage" class="preview-image">
+                        <button class="remove-btn" onclick="removePhoto()">Remove photo</button>
+                    </div>
+                </div>
+                
+                <textarea id="captionInput" placeholder="Write a caption..." rows="3"></textarea>
+            </div>
+        </div>
+    </div>
 
-  <header>💖 MANY MORE HAPPY RETURNS OF THE DAY ANUSHA 💖</header>
-
-  <h1>🎂 Happy Birthday Anusha 🎉</h1>
-  <p>Wishing you endless happiness, success! 💫</p>
-
-  <button id="playBtn">🎵 Tap to Play Music</button>
-
-  <canvas id="fireworks"></canvas>
-  <div class="hearts" id="hearts"></div>
-
-  <audio id="bgMusic" loop>
-    <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
-  </audio>
-
-<script>
-  // Music button
-  const music = document.getElementById('bgMusic');
-  const playBtn = document.getElementById('playBtn');
-  playBtn.addEventListener('click', () => {
-    music.play();
-    playBtn.style.display = 'none';
-  });
-
-  // Fireworks
-  const canvas = document.getElementById("fireworks");
-  const ctx = canvas.getContext("2d");
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-
-  const fireworks = [];
-
-  class Firework {
-    constructor() {
-      this.x = Math.random() * canvas.width;
-      this.y = canvas.height;
-      this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
-      this.radius = Math.random() * 2 + 1;
-      this.vx = Math.random() * 3 - 1.5;
-      this.vy = Math.random() * -10 - 5;
-      this.alpha = 1;
-    }
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-      this.vy += 0.25;
-      this.alpha -= 0.02;
-    }
-    draw() {
-      ctx.globalAlpha = this.alpha;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
-      ctx.fill();
-    }
-  }
-
-  function animate() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    if (Math.random() < 0.15) {
-      for (let i = 0; i < 50; i++) fireworks.push(new Firework());
-    }
-    for (let i = fireworks.length - 1; i >= 0; i--) {
-      const f = fireworks[i];
-      f.update();
-      f.draw();
-      if (f.alpha <= 0) fireworks.splice(i, 1);
-    }
-    requestAnimationFrame(animate);
-  }
-  animate();
-
-  // Floating Hearts
-  function createHeart() {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = Math.random() * 3 + 4 + "s";
-    heart.innerHTML = "💖";
-    document.getElementById("hearts").appendChild(heart);
-    setTimeout(() => heart.remove(), 7000);
-  }
-  setInterval(createHeart, 300);
-
-  window.addEventListener("resize", () => {
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
-  });
-</script>
-
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Firebase Configuration (Replace with your config)
+       const firebaseConfig = {
+  apiKey: "AIzaSyAjBQ9ft5lNeHKrzl1pdIi7iqcFPSZtdWQ",
+  authDomain: "mini-insta-a8db2.firebaseapp.com",
+  projectId: "mini-insta-a8db2",
+  storageBucket: "mini-insta-a8db2.firebasestorage.app",
+  messagingSenderId: "1080872127192",
+  appId: "1:1080872127192:web:e4bbe1d75aac78c110a5ad",
+  measurementId: "G-RQ1LHXXW9Q"
+};
+        
+        // State
+        let currentUser = null;
+        let posts = [];
+        let selectedFile = null;
+        let previewUrl = null;
+        
+        // Initialize
+        function init() {
+            const storedUser = localStorage.getItem('instaUser');
+            if (storedUser) {
+                currentUser = JSON.parse(storedUser);
+                loadPosts();
+                showFeed();
+            }
+        }
+        
+        // View Management
+        function showView(viewId) {
+            ['loginView', 'signupView', 'feedView', 'uploadView'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById(viewId).classList.remove('hidden');
+            lucide.createIcons();
+        }
+        
+        function showLogin() {
+            showView('loginView');
+            document.getElementById('errorMsg').classList.add('hidden');
+        }
+        
+        function showSignup() {
+            showView('signupView');
+            document.getElementById('errorMsgSignup').classList.add('hidden');
+        }
+        
+        function showFeed() {
+            showView('feedView');
+            renderPosts();
+        }
+        
+        function showUpload() {
+            showView('uploadView');
+            document.getElementById('uploadError').classList.add('hidden');
+            document.getElementById('captionInput').value = '';
+            removePhoto();
+        }
+        
+        // Auth Functions
+        async function handleSignIn() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const errorMsg = document.getElementById('errorMsg');
+            
+            if (!email || !password) {
+                errorMsg.textContent = 'Please fill in all fields';
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+            
+            try {
+                // Mock sign in (replace with Firebase auth)
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                currentUser = {
+                    uid: Date.now().toString(),
+                    email: email,
+                    username: email.split('@')[0]
+                };
+                
+                localStorage.setItem('instaUser', JSON.stringify(currentUser));
+                loadPosts();
+                showFeed();
+            } catch (error) {
+                errorMsg.textContent = error.message;
+                errorMsg.classList.remove('hidden');
+            }
+        }
+        
+        async function handleSignUp() {
+            const username = document.getElementById('signupUsername').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const errorMsg = document.getElementById('errorMsgSignup');
+            
+            if (!username || !email || !password) {
+                errorMsg.textContent = 'Please fill in all fields';
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+            
+            if (password.length < 6) {
+                errorMsg.textContent = 'Password must be at least 6 characters';
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+            
+            try {
+                // Mock sign up (replace with Firebase auth)
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                currentUser = {
+                    uid: Date.now().toString(),
+                    email: email,
+                    username: username
+                };
+                
+                localStorage.setItem('instaUser', JSON.stringify(currentUser));
+                loadPosts();
+                showFeed();
+            } catch (error) {
+                errorMsg.textContent = error.message;
+                errorMsg.classList.remove('hidden');
+            }
+        }
+        
+        function handleLogout() {
+            localStorage.removeItem('instaUser');
+            currentUser = null;
+            posts = [];
+            showLogin();
+        }
+        
+        // Posts Functions
+        function loadPosts() {
+            const stored = localStorage.getItem('instaPosts');
+            if (stored) {
+                posts = JSON.parse(stored);
+            }
+        }
+        
+        function savePosts() {
+            localStorage.setItem('instaPosts', JSON.stringify(posts));
+        }
+        
+        function renderPosts() {
+            const container = document.getElementById('postsContainer');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (posts.length === 0) {
+                emptyState.classList.remove('hidden');
+                container.innerHTML = '';
+                return;
+            }
+            
+            emptyState.classList.add('hidden');
+            
+            container.innerHTML = posts.map(post => {
+                const isLiked = post.likedBy.includes(currentUser.uid);
+                const date = new Date(post.timestamp).toLocaleDateString();
+                
+                return `
+                    <div class="post">
+                        <div class="post-header">
+                            <div class="post-avatar">
+                                <i data-lucide="user"></i>
+                            </div>
+                            <div>
+                                <div class="post-username">${post.username}</div>
+                                <div class="post-date">${date}</div>
+                            </div>
+                        </div>
+                        <img src="${post.imageUrl}" class="post-image" alt="${post.caption}">
+                        <div class="post-actions">
+                            <button class="like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${post.id}')">
+                                <i data-lucide="heart" style="width: 24px; height: 24px;"></i>
+                            </button>
+                            <div class="post-likes">${post.likes} ${post.likes === 1 ? 'like' : 'likes'}</div>
+                            ${post.caption ? `<div class="post-caption"><strong>${post.username}</strong>${post.caption}</div>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            lucide.createIcons();
+        }
+        
+        function toggleLike(postId) {
+            posts = posts.map(post => {
+                if (post.id === postId) {
+                    const hasLiked = post.likedBy.includes(currentUser.uid);
+                    return {
+                        ...post,
+                        likes: hasLiked ? post.likes - 1 : post.likes + 1,
+                        likedBy: hasLiked 
+                            ? post.likedBy.filter(id => id !== currentUser.uid)
+                            : [...post.likedBy, currentUser.uid]
+                    };
+                }
+                return post;
+            });
+            
+            savePosts();
+            renderPosts();
+        }
+        
+        // Upload Functions
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                selectedFile = file;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    previewUrl = e.target.result;
+                    document.getElementById('previewImage').src = previewUrl;
+                    document.getElementById('fileSelectArea').classList.add('hidden');
+                    document.getElementById('previewArea').classList.remove('hidden');
+                    document.getElementById('shareBtn').disabled = false;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        function removePhoto() {
+            selectedFile = null;
+            previewUrl = null;
+            document.getElementById('fileInput').value = '';
+            document.getElementById('fileSelectArea').classList.remove('hidden');
+            document.getElementById('previewArea').classList.add('hidden');
+            document.getElementById('shareBtn').disabled = true;
+        }
+        
+        async function handlePost() {
+            if (!selectedFile) return;
+            
+            const caption = document.getElementById('captionInput').value;
+            const shareBtn = document.getElementById('shareBtn');
+            
+            shareBtn.disabled = true;
+            shareBtn.textContent = 'Posting...';
+            
+            try {
+                // Mock upload (replace with Firebase Storage)
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                const newPost = {
+                    id: Date.now().toString(),
+                    userId: currentUser.uid,
+                    username: currentUser.username,
+                    imageUrl: previewUrl,
+                    caption: caption,
+                    likes: 0,
+                    timestamp: new Date().toISOString(),
+                    likedBy: []
+                };
+                
+                posts.unshift(newPost);
+                savePosts();
+                showFeed();
+            } catch (error) {
+                document.getElementById('uploadError').textContent = 'Failed to post image';
+                document.getElementById('uploadError').classList.remove('hidden');
+            } finally {
+                shareBtn.disabled = false;
+                shareBtn.textContent = 'Share';
+            }
+        }
+        
+        // Initialize app
+        init();
+    </script>
 </body>
 </html>
